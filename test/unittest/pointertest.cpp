@@ -1,6 +1,6 @@
 // Tencent is pleased to support the open source community by making RapidJSON available.
 // 
-// Copyright (C) 2015 THL A29 Limited, a Tencent company, and Milo Yip. All rights reserved.
+// Copyright (C) 2015 THL A29 Limited, a Tencent company, and Milo Yip.
 //
 // Licensed under the MIT License (the "License"); you may not use this file except
 // in compliance with the License. You may obtain a copy of the License at
@@ -674,6 +674,9 @@ TEST(Pointer, Get) {
     EXPECT_EQ(2u, unresolvedTokenIndex);
     EXPECT_TRUE(Pointer("/foo/0/a").Get(d, &unresolvedTokenIndex) == 0); // "/foo/0" is an string, cannot further query
     EXPECT_EQ(2u, unresolvedTokenIndex);
+
+    Pointer::Token tokens[] = { { "foo ...", 3, kPointerInvalidIndex } };
+    EXPECT_EQ(&d["foo"], Pointer(tokens, 1).Get(d));
 }
 
 TEST(Pointer, GetWithDefault) {
